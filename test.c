@@ -55,5 +55,61 @@ int main(int argc, char const *argv[])
 	printf("euler angles :\t%f %f %f \n", d.x, d.y, d.z);
 
 
+	printf("\n==== test ====\n");
+
+
+	t_quaternion test;
+
+	test = ft_quaternion_set(1,0,0,0);
+
+	t_quaternion test_q;
+	t_quaternion test_p;
+
+	test_q = ft_quaternion_multiply(q, test);
+	test_q = ft_quaternion_multiply(test_q, ft_quaternion_conjugate(q));
+
+	test_p = ft_quaternion_multiply(p, test);
+	test_p = ft_quaternion_multiply(test_p, ft_quaternion_conjugate(p));
+
+	printf("test_q %f %f %f %f\n", test_q.x, test_q.y, test_q.z, test_q.w);
+	printf("test_p %f %f %f %f\n", test_p.x, test_p.y, test_p.z, test_p.w);
+
+	t_angles test_angle = ft_quaternion_euler_to_angles(test);
+	t_angles test_q_angle = ft_quaternion_euler_to_angles(test_q);
+	t_angles test_p_angle = ft_quaternion_euler_to_angles(test_p);
+
+	printf("test euler angles :\t%f %f %f \n", test_angle.x / M_PI * 100, test_angle.y / M_PI * 100, test_angle.z / M_PI * 100);
+	printf("test_q euler angles :\t%f %f %f \n", test_q_angle.x / M_PI * 100, test_q_angle.y / M_PI * 100, test_q_angle.z / M_PI * 100);
+	printf("test_p euler angles :\t%f %f %f \n", test_p_angle.x / M_PI * 100, test_p_angle.y / M_PI * 100, test_p_angle.z / M_PI * 100);
+
+
+	t_vec3 v_test;
+
+	v_test = ft_vector_3(1,0,0);
+
+	t_vec3 v_q = ft_quaternion_rotate_vec3(q,v_test);
+	t_vec3 v_p = ft_quaternion_rotate_vec3(p,v_test);
+
+	printf("v_q %f %f %f \n", v_q.x, v_q.y, v_q.z);
+	printf("v_p %f %f %f \n", v_p.x, v_p.y, v_p.z);
+
+
+
+	printf("\n==== origin ====\n");
+
+	t_mtx4	m_x = ft_mtx4_rot_x(0.6);
+	t_mtx4	m_y = ft_mtx4_rot_y(0.1);
+	t_mtx4	m_z = ft_mtx4_rot_z(0.8);
+
+	t_mtx4 m4_test;
+	
+	m4_test = ft_mtx4_identity();
+	m4_test = ft_mtx4_mult_mtx4(m4_test, m_x);
+	m4_test = ft_mtx4_mult_mtx4(m4_test, m_y);
+	m4_test = ft_mtx4_mult_mtx4(m4_test, m_z);
+	
+	t_vec3 orgin_v3 = ft_mtx4_mult_vec3(m4_test, v_test);
+
+	printf("orgin_v3 %f %f %f \n", orgin_v3.x, orgin_v3.y, orgin_v3.z);
 	return 0;
 }

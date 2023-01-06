@@ -6,7 +6,7 @@
 /*   By: kyoulee <kyoulee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 16:37:16 by kyoulee           #+#    #+#             */
-/*   Updated: 2023/01/04 19:49:22 by kyoulee          ###   ########.fr       */
+/*   Updated: 2023/01/07 01:17:04 by kyoulee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_quaternion	ft_quaternion_set(double x, double y, double z, double w)
 
 t_quaternion	ft_quaternion_identity()
 {
-    return (ft_quaternion_set(1, 0, 0, 0));
+    return (ft_quaternion_set(0, 0, 0, 1));
 }
 
 t_quaternion	ft_quaternion_conjugate(t_quaternion q)
